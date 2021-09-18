@@ -23,6 +23,24 @@
   #{nixpkgs.config.allowBroken = true;}
 
   #wifi
+  
+  #vga
+
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+  };
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      vaapiIntel
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
+
+
 
   networking.hostName = "terra"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -36,9 +54,9 @@
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.enp2s0f1.useDHCP = false;
-  networking.interfaces.wlp3s0.useDHCP = false;
+  #networking.useDHCP = false;
+  #networking.interfaces.enp2s0f1.useDHCP = false;
+  #networking.interfaces.wlp3s0.useDHCP = false;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -65,6 +83,15 @@
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.startx.enable = true;
 
+  #services.xserver = {
+  #  enable = true;
+  #  desktopManager = {
+  #    xterm.enable = false;
+  #    xfce.enable = true;
+  #  };
+  #  displayManager.defaultSession = "xfce";
+  # };
+
   # Configure keymap in X11
    services.xserver.layout = "us";
    services.xserver.xkbOptions = "eurosign:e";
@@ -79,6 +106,13 @@
   # Enable touchpad support (enabled default in most desktopManager).
    services.xserver.libinput.enable = true;
    services.xserver.libinput.touchpad.naturalScrolling = true;
+   #services.xserver.displayManager.tappingDragLock = false;
+
+   #xrandr
+
+   #services.xserver.monitorSection = ''
+   # xrandr --output HDMI2 --left-of eDP1
+   # '';
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
    users.users.felipe = {

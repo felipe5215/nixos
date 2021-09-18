@@ -4,6 +4,9 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  #go
+  programs.go.enable = true;
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "felipe";
@@ -19,14 +22,15 @@
   # changes in each release.
   home.stateVersion = "21.05";
 
+  
+    
   programs.vim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [ 
-     vim-go 
-     vim-sensible
  ];
+    settings = { ignorecase = true;  };
     extraConfig = ''
-    #set mouse =a
+      set mouse=a
     '';
   };
 
@@ -35,10 +39,22 @@
     dmenu
     dwm
     st
+    alacritty
     pavucontrol
     vifm
+
+    ffmpeg
+
+    elinks
+
+    unzip
+    vlc
+
+
+    zathura
+    transmission-gtk
+
    
-    vim_configurable
     htop
     neofetch
     git
@@ -48,20 +64,37 @@
 
 
     chromium
-    lynx
     
-    vscodium-fhs
 
     intel-media-driver
     xorg.xf86videointel
+    vaapiIntel
+    vaapiVdpau
+    libvdpau-va-gl
+
+    xorg_sys_opengl
+
 
     gcc
     gnumake
     python
+    python39Packages.ipython
     go
+    rustup
     nodejs
     ghc
     nim
+    mitscheme
+    emacs
+    vscodium-fhs
+
+    libreoffice
+    groff
+
+    vulkan-tools
+    vulkan-loader
+    vulkan-headers
+
 
 
 
